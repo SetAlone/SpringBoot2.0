@@ -1,0 +1,56 @@
+#1、修改tomcat的默认端口为8080
+#server.port=8080
+
+#2、设置运行时为debug模式
+#debug=false
+
+#3、一般情况下，小项目都是在tomcat下部署多个webapp，通过上下文来区分
+#在集群或者大中型项目中，通常一个tomcat对应一个webapp，然后通过不同的端口号来进行区分（8080/8081/8082）
+#server.servlet.cotext-path=/myspringboot
+
+#4、UTF-8只包含了20000+个中文字符，对于生僻字显示不了
+#spring.http.encoding.charset=UTF-8
+
+#5、开启thymeleaf缓存，注意，除了设置cache=false外，还要设置file->settings->bulid->complier->Bulid Project Auto勾选
+#设置为true时web页面不会自动刷新
+#spring.thymeleaf.cache=false
+
+#6、Sping MVC中对输出参数的格式化
+#spring.mvc.date-format=yyyy-MM-dd
+
+#7、设置日期序列化输出格式，北京时间相对伦敦有8个小时的时差，所以使用GMT+8
+#spring.jackson.time-zone=GTM+8
+#spring.jackson.date-format=yyyy-MM-dd HH:mm:ss SSS
+
+#日志输出的地址，Spring Boot默认没有进行文件输出，只是在控制台进行了打印
+#logging.file=d:/logs/msb.log
+
+#Logback的日志级别由低到高依次为track -->debug -->info -->warn -->error
+#Spring Boot在默认的情况下日志级别设置为info
+#当我们设置了debug=true时，日志级别会自动的降低到debug
+#ROOT代表默认全局配置
+#logging.level.root=info
+#设置指定包的输出级别
+#logging.level.org.springframework=error
+#logging.level.org.apache=error
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

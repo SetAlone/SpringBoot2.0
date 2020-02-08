@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--映射文件配置，namespace指向接口-->
+<mapper namespace="com.laoqi.springbootmybatis.mapper.EmpMapper">
+    <select id="findById" parameterType="Integer"  resultType="com.laoqi.springbootmybatis.entity.Emp">
+        select * from emp where empno = #{value}
+    </select>
+
+<!--  resultType 代表将查询到的每一条记录都包装为map，key值是字段名，value是字段值  -->
+    <select id="findDepts"  parameterType="java.util.Map" resultType="java.util.LinkedHashMap">
+        select * from emp e ,dept d where e.deptno = d.deptno
+        <if test="pdname!=null" >
+            and dname=#{pdname}
+        </if>
+        <if test="psal!=null">
+            and  sal >#{psal}
+        </if>
+    </select>
+
+    <insert id="create" parameterType="com.laoqi.springbootmybatis.entity.Emp">
+        INSERT INTO `scoot`.`emp`(`ename`, `job`, `mgr`, `hiredate`, `sal`, `comm`, `deptno`)
+        VALUES (#{ename}, #{job}, #{mgr}, #{hiredate}, #{sal}, #{comm}, #{deptno})
+        <!-- 自动进行主键回填 select LAST_INSERT_ID()用于获取最新插入的id，是mysql内置函数-->
+        <selectKey keyProperty="empno" keyColumn="empno" resultType="Integer" order="AFTER">
+            select LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <update id="update" parameterType="com.itlaoqi.springbootmybatis.entity.Emp">
+        UPDATE `scott`.`emp` SET `ename` = #{ename}, `job` = #{job}, `mgr` = #{mgr}, `hiredate` = #{hiredate}, `sal` = #{sal}, `comm` = #{comm}, `deptno` = #{deptno}
+        WHERE `empno` = #{empno};
+    </update>
+
+    <delete id="delete" parameterType="Integer">
+        DELETE FROM emp WHERE empno = #{value}
+    </delete>
+
+</mapper>
